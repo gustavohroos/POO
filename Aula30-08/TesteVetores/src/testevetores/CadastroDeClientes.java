@@ -30,6 +30,7 @@ public class CadastroDeClientes {
         cadastro.incluir(new Cliente("99999999999", "Gustavo"));
         cadastro.incluir(new Cliente("88888888888", "Henrique"));
         cadastro.incluir(new Cliente("77777777777", "Giba"));
+        cadastro.incluir(new Cliente("03348257093", "Maria Eduarda"));
         cadastro.imprimir();
         System.out.println("Quantidade de clientes cadastrados: " + cadastro.numeroDeClientes);
     }
