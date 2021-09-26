@@ -6,7 +6,7 @@ public class App {
         //Lembretes lembreteOne = new Lembretes("202020", "gustavo", "sou bobo");
         //lembreteOne.Imprimir();
 
-        listaDeLembretes[1] = "1";
+        // listaDeLembretes[1] = "1";
 
     }
 }
