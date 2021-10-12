@@ -14,7 +14,19 @@ public class Aula13 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Cachorro c = new Cachorro();
+        
+        c.reagir("Vai apanhar");
+        c.reagir("Olá");
+        c.reagir(false);
+        c.reagir(true);
+        c.reagir(9, 10);
+        c.reagir(15, 30);
+        c.reagir(21, 00);
+        c.reagir(7, 8.56f);
+        c.reagir(14, 29.56f);
+        c.reagir(2, 40.56f);
     }
     
 }
