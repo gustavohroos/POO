@@ -4,11 +4,14 @@
  */
 package supertrunfodareciclagem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author gustavo
  */
-public abstract class Carta {
+public abstract class Carta implements Serializable {
+    private char[] codigo;
     private String nome;
     private String descricao;
     private String tipo;
@@ -18,10 +21,24 @@ public abstract class Carta {
     
     public abstract boolean ehReciclavel();
 
+    public Carta(char[] codigo, String nome, String descricao, String tipo, Cor cor, double decomposicao, int ataque) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.tipo = tipo;
+        this.cor = cor;
+        this.decomposicao = decomposicao;
+        this.ataque = ataque;
+    }
+
     @Override
     public String toString() {
-        return "Carta{" + "nome=" + nome + ", descricao=" + descricao + ", tipo=" + tipo + ", cor=" + cor + ", decomposicao=" + decomposicao + ", ataque=" + ataque + '}';
+        return ("------------------------------------\n" + "Código: " + codigo[0]+codigo[1] + 
+               ", Nome: " + nome + "\nDescrição: '" + descricao + "'\nTipo: " + 
+                tipo + ", Cor: " + cor + "\nDecomposicao: " + decomposicao + 
+                " anos" + "\nAtaque: " + ataque + "\n");
     }
+    
     
     
     

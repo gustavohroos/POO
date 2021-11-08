@@ -6,14 +6,15 @@
 
 package supertrunfodareciclagem;
 
-import java.util.LinkedList; // import the ArrayList class
+import java.util.LinkedList;
+import java.util.Queue;
 /**
  *
  * @author gustavo
  */
 public class Jogador {
     private String nome;
-    private LinkedList<Carta> cartas;
+    private Queue<Carta> cartas;
     
     public String nome(){
         return this.nome;
@@ -21,14 +22,17 @@ public class Jogador {
     public int numeroDeCartas(){
         return cartas.size();
     }
-    public void incluir(CartaAdd){
-        cartas.add(CartaAdd);
+    public void incluir(Carta cartaAdd){
+        cartas.add(cartaAdd);
     }
     
     public Carta excluir(){
         
+        Carta cartaReturn = cartas.peek();
         
-        return carta;
+        cartas.remove(cartas.peek());
+        
+        return cartaReturn;
         
     }
     
