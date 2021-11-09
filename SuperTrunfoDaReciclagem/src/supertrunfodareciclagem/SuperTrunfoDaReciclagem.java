@@ -92,12 +92,12 @@ public class SuperTrunfoDaReciclagem {
                         j0.incluir(primeira);
                         j0.incluir(segunda);
                         j1.excluir();
-                }
+                    }
                     case -1 -> {
                         System.out.println("Empate, jogue novamente jogador '"
                                 + j0.nome() + "':");
                         vez = 0;
-                }
+                    }
                     default -> {
                         System.out.println("Jogador '" + j1.nome() +"' ganhou, passando"
                                 + " a vez...");
@@ -105,7 +105,7 @@ public class SuperTrunfoDaReciclagem {
                         j1.incluir(primeira);
                         j1.incluir(segunda);
                         j0.excluir();
-                }
+                    }
                 }
             }
             case 1 -> {
@@ -122,12 +122,12 @@ public class SuperTrunfoDaReciclagem {
                         j1.incluir(primeira);
                         j1.incluir(segunda);
                         j0.excluir();
-                }
+                    }
                     case -1 -> {
                         System.out.println("Empate, jogue novamente jogador '"
                                 + j1.nome() + "':");
                         vez = 1;
-                }
+                    }
                     default -> {
                         System.out.println("Jogador '" + j0.nome() +"' ganhou, passando"
                                 + " a vez...");
@@ -135,7 +135,7 @@ public class SuperTrunfoDaReciclagem {
                         j0.incluir(primeira);
                         j0.incluir(segunda);
                         j1.excluir();
-                }
+                    }
                 }
             }
         }
