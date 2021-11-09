@@ -14,7 +14,11 @@ import java.util.Queue;
  */
 public class Jogador {
     private String nome;
-    private Queue<Carta> cartas;
+    private final Queue<Carta> cartas;
+
+    public Jogador() {
+        cartas = new LinkedList<>();
+    }
     
     public String nome(){
         return this.nome;
@@ -26,17 +30,25 @@ public class Jogador {
         cartas.add(cartaAdd);
     }
     
-    public Carta excluir(){
-        
-        Carta cartaReturn = cartas.peek();
-        
-        cartas.remove(cartas.peek());
-        
-        return cartaReturn;
-        
+    public Carta mostrarPrimeira(){
+        return cartas.peek();
+    }
+    
+    public Carta excluir(){        
+        return cartas.remove();
     }
     
     public boolean temCartas(){
-        return cartas.isEmpty();
+        return !cartas.isEmpty();
     }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "Jogador{" + "Nome: " + nome + "\nCartas: " + cartas + '}';
+    }
+
 }

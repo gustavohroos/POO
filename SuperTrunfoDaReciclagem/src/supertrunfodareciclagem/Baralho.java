@@ -8,41 +8,41 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
-
 /**
  *
  * @author gustavo
  */
 public class Baralho {
-    private final List<Carta> baralho;
-    private Random indice;
+    public final List<Carta> baralho;
+    public int numeroCartas;
 
     public Baralho() throws FileNotFoundException {
         baralho = new ArrayList<>();
         leituraDoArquivo("super.csv");
-        indice = new Random();
+        Collections.shuffle(baralho);
+        numeroCartas = baralho.size();
     }
     
-    private final void leituraDoArquivo(String nome) {
+    private void leituraDoArquivo(String nome) {
         try{
-            BufferedReader reader = new BufferedReader(new FileReader(nome));
-            String linha;
-        
-            do {
-                linha = reader.readLine();
-                if (linha != null){
-                    baralho.add(criarCarta(linha));
+            try (BufferedReader reader = new BufferedReader(new FileReader(nome))) {
+                String linha;
+                
+                do {
+                    linha = reader.readLine();
+                    if (linha != null){
+                        baralho.add(criarCarta(linha));
                     }
-            } while (linha != null);
-            reader.close();
+                } while (linha != null);
+            }
         } catch (IOException ioe) {
                 System.out.println("Erro: arquivo '"+ nome + "' não encontrado");
         }
     }
     
-    private final Carta criarCarta(String linha) {
+    private Carta criarCarta(String linha) {
         String[] atributos = linha.split(";");
         if ((atributos[7].equals("sim")) || atributos[7].equals("Sim")) {
             return new Reciclavel(atributos[0].toCharArray(),
@@ -69,5 +69,12 @@ public class Baralho {
         return "Baralho{" + baralho + '}';
     }
     
-    
+    public void distribuirCartas(Jogador j0, Jogador j1){
+        int cartasPorJogador = this.numeroCartas/2;
+        
+        for(int i = 0; i < cartasPorJogador; i++){
+            j0.incluir(this.baralho.get(numeroCartas - i - 1));
+            j1.incluir(this.baralho.get(i));
+        }
+    }   
 }
