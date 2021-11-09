@@ -18,9 +18,7 @@ public class SuperTrunfoDaReciclagem {
         Jogador j[] = new Jogador[2];
         System.out.println("## Bem-vindo ao jogo SUPER TRUNFO DA RECICLAGEM ##");
         System.out.print("          pressione ENTER para começar");
-        pressEnter();
-        
-        
+        pressEnter();        
                 
         for(int i = 0; i < 2; i++){
             j[i] = new Jogador();
@@ -48,6 +46,8 @@ public class SuperTrunfoDaReciclagem {
             pressEnter();
             turno++;
         }
+        
+        System.out.println("Obrigado por jogar.  Adeus.");
     }
     
     public static int menuAtributo(Jogador j){
