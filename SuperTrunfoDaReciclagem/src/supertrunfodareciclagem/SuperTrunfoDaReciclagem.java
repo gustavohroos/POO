@@ -1,4 +1,3 @@
-
 package supertrunfodareciclagem;
 
 import java.io.FileNotFoundException;
@@ -16,6 +15,7 @@ public class SuperTrunfoDaReciclagem {
         int turno;
         Scanner sc = new Scanner(System.in);
         Jogador j[] = new Jogador[2];
+        clearScr();
         System.out.println("## Bem-vindo ao jogo SUPER TRUNFO DA RECICLAGEM ##");
         System.out.print("          pressione ENTER para começar");
         pressEnter();        
@@ -29,6 +29,7 @@ public class SuperTrunfoDaReciclagem {
         
         System.out.println("\nPressione ENTER para começar o jogo");
         pressEnter();
+        clearScr();
         turno = 1;
         int vez = chooseOne();
         baralho.distribuirCartas(j[0], j[1]);
@@ -45,6 +46,12 @@ public class SuperTrunfoDaReciclagem {
             System.out.println("\nPressione ENTER para próxima rodada...");
             pressEnter();
             turno++;
+            clearScr();
+        }
+        if(j[0].temCartas()){
+            System.out.println("Parabéns '" + j[0].nome() + "', você venceu!");
+        } else {
+            System.out.println("Parabéns '" + j[1].nome() + "', você venceu!");
         }
         
         System.out.println("Obrigado por jogar.  Adeus.");
@@ -61,6 +68,7 @@ public class SuperTrunfoDaReciclagem {
             System.out.println("\t4 - Ataque");
             System.out.print("Sua escolha: ");
             op = sc.nextInt();
+            clearScr();
         } while (op < 1 && op > 4);
         return op;
     }
@@ -73,12 +81,14 @@ public class SuperTrunfoDaReciclagem {
     
     public static int jogar(Baralho baralho, Jogador j0, Jogador j1, int vez){
         
+        
         Carta primeira, segunda;
         int atributo;
         primeira = j0.mostrarPrimeira();
         segunda = j1.mostrarPrimeira();
         switch (vez){
             case 0 -> {
+                System.out.println(">>>Vez do jogador '" + j0.nome() + "'");
                 System.out.println(">>>Carta jogador 1:\n" + primeira);
                 atributo = menuAtributo(j0);
                 vez = primeira.comparar(atributo, segunda, vez);
@@ -88,27 +98,45 @@ public class SuperTrunfoDaReciclagem {
                     case 0 -> {
                         System.out.println("Jogador '" + j0.nome() +"' ganhou"
                                 + ", jogue novamente");
+                        j1.excluir();
                         j0.excluir();
                         j0.incluir(primeira);
                         j0.incluir(segunda);
-                        j1.excluir();
+                        if (!baralho.empate.isEmpty()){
+                            baralho.empate.forEach(carta -> {
+                                j0.incluir(carta);
+                            });
+                            baralho.empate.clear();
+                        }
                     }
                     case -1 -> {
                         System.out.println("Empate, jogue novamente jogador '"
                                 + j0.nome() + "':");
+                        j0.excluir();
+                        j1.excluir();
+                        baralho.empate.add(primeira);
+                        baralho.empate.add(segunda);
+                        System.out.println("Montante empatado: " + baralho.empate.size());
                         vez = 0;
                     }
                     default -> {
                         System.out.println("Jogador '" + j1.nome() +"' ganhou, passando"
                                 + " a vez...");
+                        j0.excluir();
                         j1.excluir();
                         j1.incluir(primeira);
                         j1.incluir(segunda);
-                        j0.excluir();
+                        if (!baralho.empate.isEmpty()){
+                            baralho.empate.forEach(carta -> {
+                                j1.incluir(carta);
+                            });
+                            baralho.empate.clear();
+                        }
                     }
                 }
             }
             case 1 -> {
+                System.out.println(">>>Vez do jogador '" + j1.nome());
                 System.out.println(">>>Carta jogador 2:\n" + segunda);
                 atributo = menuAtributo(j1);
                 vez = segunda.comparar(atributo, primeira, vez);
@@ -118,23 +146,40 @@ public class SuperTrunfoDaReciclagem {
                     case 1 -> {
                         System.out.println("Jogador '" + j1.nome() +"' ganhou"
                                 + ", jogue novamente");
+                        j0.excluir();
                         j1.excluir();
                         j1.incluir(primeira);
-                        j1.incluir(segunda);
-                        j0.excluir();
+                        j1.incluir(segunda);                        
+                        if (!baralho.empate.isEmpty()){
+                            baralho.empate.forEach(carta -> {
+                                j1.incluir(carta);
+                            });
+                            baralho.empate.clear();
+                        }
                     }
                     case -1 -> {
                         System.out.println("Empate, jogue novamente jogador '"
                                 + j1.nome() + "':");
+                        j0.excluir();
+                        j1.excluir();
+                        baralho.empate.add(primeira);
+                        baralho.empate.add(segunda);
+                        System.out.println("Montante empatado: " + baralho.empate.size());
                         vez = 1;
                     }
                     default -> {
                         System.out.println("Jogador '" + j0.nome() +"' ganhou, passando"
                                 + " a vez...");
+                        j1.excluir();
                         j0.excluir();
                         j0.incluir(primeira);
                         j0.incluir(segunda);
-                        j1.excluir();
+                        if (!baralho.empate.isEmpty()){
+                             baralho.empate.forEach(carta -> {
+                                 j0.incluir(carta);
+                            });
+                            baralho.empate.clear();
+                        }
                     }
                 }
             }
@@ -147,5 +192,11 @@ public class SuperTrunfoDaReciclagem {
     public static void pressEnter(){
         Scanner sc = new Scanner(System.in);
         String lixo = sc.nextLine();
+    }
+    
+    public static void clearScr(){
+        for (int i = 0; i < 100; i++){
+            System.out.println("\n");
+        }
     }
 }

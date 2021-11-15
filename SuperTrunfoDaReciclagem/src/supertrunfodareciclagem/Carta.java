@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package supertrunfodareciclagem;
 
 import java.io.Serializable;
@@ -11,13 +7,13 @@ import java.io.Serializable;
  * @author gustavo
  */
 public abstract class Carta implements Serializable {
-    private char[] codigo;
-    private String nome;
-    private String descricao;
-    private String tipo;
-    private Cor cor;
-    private double decomposicao;
-    private int ataque;
+    private final char[] codigo;
+    private final String nome;
+    private final String descricao;
+    private final String tipo;
+    private final Cor cor;
+    private final double decomposicao;
+    private final int ataque;
     
     protected abstract boolean ehReciclavel();
 
@@ -234,5 +230,4 @@ public abstract class Carta implements Serializable {
         }
         return 0;
     }
-    
 }
