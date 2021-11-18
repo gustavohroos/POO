@@ -1,6 +1,7 @@
 package supertrunfodareciclagem;
 
 import java.io.Serializable;
+import static java.lang.System.exit;
 
 /**
  *
@@ -168,7 +169,7 @@ public abstract class Carta implements Serializable {
     public int comparar(int atributo, Carta oponente, int vez){
         int ganhou;
         switch (atributo){
-            case 1 -> {
+            case 0 -> {
                 ganhou = this.comparaCor(oponente);
                 if ((vez == 0 || vez == 1) && ganhou == 0){
                     return -1;
@@ -182,7 +183,7 @@ public abstract class Carta implements Serializable {
                     return 0;
                 }
             }
-            case 2 -> {
+            case 1 -> {
                 ganhou = this.comparaDecomposicao(oponente);
                 if ((vez == 0 || vez == 1) && ganhou == 0){
                     return -1;
@@ -196,7 +197,7 @@ public abstract class Carta implements Serializable {
                     return 0;
                 }
             }
-            case 3 -> {
+            case 2 -> {
                 ganhou = this.comparaReciclavel(oponente);
                 if ((vez == 0 || vez == 1) && ganhou == 0){
                     return -1;
@@ -210,7 +211,7 @@ public abstract class Carta implements Serializable {
                     return 0;
                 }
             }
-            case 4 -> {
+            case 3 -> {
                 ganhou = this.comparaAtaque(oponente);
                 if ((vez == 0 || vez == 1) && ganhou == 0){
                     return -1;
@@ -226,6 +227,7 @@ public abstract class Carta implements Serializable {
             }
             default -> {
                 System.out.println("Erro!");
+                exit(0);
             }
         }
         return 0;

@@ -5,19 +5,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 /**
  *
  * @author gustavo
  */
 public class Baralho {
-    public final List<Carta> baralho;
-    public final List<Carta> empate;
-    public int numeroCartas;
+    private final List<Carta> baralho;
+    private final Queue<Carta> empate;
+    private int numeroCartas;
 
     public Baralho() throws FileNotFoundException {
         baralho = new ArrayList<>();
-        empate = new ArrayList<>();
+        empate = new LinkedList<>();
         leituraDoArquivo("super.csv");
         Collections.shuffle(baralho);
         numeroCartas = baralho.size();
@@ -74,5 +76,28 @@ public class Baralho {
             j0.incluir(this.baralho.get(numeroCartas - i - 1));
             j1.incluir(this.baralho.get(i));
         }
-    }   
+    }
+    
+    public int numeroDeCartasEmpate(){
+        return empate.size();
+    }
+    public void incluirEmpate(Carta cartaAdd){
+        empate.add(cartaAdd);
+    }
+    
+    public Carta mostrarPrimeiraEmpate(){
+        return empate.peek();
+    }
+    
+    public Carta excluirEmpate(){        
+        return empate.remove();
+    }
+    
+    public boolean temCartasEmpate(){
+        return !empate.isEmpty();
+    }
+    
+    public void limparEmpate(){
+        empate.clear();
+    }
 }
